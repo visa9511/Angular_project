@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./buttoncomponent.component.css']
 })
 export class ButtoncomponentComponent {
+  counter: number = 0;
 
+  increment() {
+    this.counter++;
+  }
+
+  decrement() {
+    if (this.counter > 0) {
+      this.counter--;
+    }
+  }
 }
+
+

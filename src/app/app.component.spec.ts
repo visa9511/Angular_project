@@ -1,27 +1,31 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { Component } from '@angular/core';
 
-describe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    declarations: [AppComponent]
-  }));
+@Component({
+  selector: 'app-root',
+  template: `
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-4">
+          <div class="btn-group d-flex" role="group" aria-label="Basic outlined example">
+            <button type="button" class="btn btn-outline-primary" (click)="decrement()">-</button>
+            <button type="button" class="btn btn-outline-primary">{{ counter }}</button>
+            <button type="button" class="btn btn-outline-primary" (click)="increment()">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `,
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'MyAngularAppName';
+  counter = 0;
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+  increment() {
+    this.counter++;
+  }
 
-  it(`should have as title 'MyAngularAppName'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('MyAngularAppName');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('MyAngularAppName app is running!');
-  });
-});
+  decrement() {
+    this.counter--;
+  }
+}
