@@ -1,31 +1,38 @@
-import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppComponent } from './app.component';
 
-@Component({
-  selector: 'app-root',
-  template: `
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-4">
-          <div class="btn-group d-flex" role="group" aria-label="Basic outlined example">
-            <button type="button" class="btn btn-outline-primary" (click)="decrement()">-</button>
-            <button type="button" class="btn btn-outline-primary">{{ counter }}</button>
-            <button type="button" class="btn btn-outline-primary" (click)="increment()">+</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `,
-  styleUrls: ['./app.component.css']
-})
-export class AppComponent {
-  title = 'MyAngularAppName';
-  counter = 0;
+describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
 
-  increment() {
-    this.counter++;
-  }
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [AppComponent]
+    })
+    .compileComponents();
+  });
 
-  decrement() {
-    this.counter--;
-  }
-}
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create the app', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should increase the counter when increase button is clicked', () => {
+    const initialCounterValue = component.counter;
+    const increaseButton = fixture.nativeElement.querySelector('#increase');
+    increaseButton.click();
+    expect(component.counter).toBe(initialCounterValue + 1);
+  });
+
+  it('should decrease the counter when decrease button is clicked', () => {
+    const initialCounterValue = component.counter;
+    const decreaseButton = fixture.nativeElement.querySelector('#decrease');
+    decreaseButton.click();
+    expect(component.counter).toBe(initialCounterValue - 1);
+  });
+});
